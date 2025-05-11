@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "svramanaa-adf"
+		},
+		"ls_employee_file_data_connectionString": {
+			"value": ""
+		},
+		"ls_sql_employee_data_password": {
+			"value": ""
+		},
+		"ls_sql_employee_data_properties_typeProperties_server": {
+			"value": "svr-staging-db.database.windows.net"
+		},
+		"ls_sql_employee_data_properties_typeProperties_database": {
+			"value": "rsv-staging-db"
+		},
+		"ls_sql_employee_data_properties_typeProperties_userName": {
+			"value": "svramanaa"
+		}
+	}
+}

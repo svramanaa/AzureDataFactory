@@ -1,0 +1,402 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "svramanaa-adf"
+		},
+		"ls_employee_file_data_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_employee_file_data'"
+		},
+		"ls_sql_employee_data_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_sql_employee_data'"
+		},
+		"ls_sql_employee_data_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "svr-staging-db.database.windows.net"
+		},
+		"ls_sql_employee_data_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "rsv-staging-db"
+		},
+		"ls_sql_employee_data_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "svramanaa"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/rsv-copy_hr_data')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "copy_employee_data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_src_employee_file",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_sink_employee_table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2025-05-11T13:46:27Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_src_employee_file')]",
+				"[concat(variables('factoryId'), '/datasets/ds_sink_employee_table')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_sink_employee_table')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_sql_employee_data",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "EmpID",
+						"type": "varchar"
+					},
+					{
+						"name": "FirstName",
+						"type": "varchar"
+					},
+					{
+						"name": "LastName",
+						"type": "varchar"
+					},
+					{
+						"name": "StartDate",
+						"type": "varchar"
+					},
+					{
+						"name": "ExitDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Title",
+						"type": "varchar"
+					},
+					{
+						"name": "Supervisor",
+						"type": "varchar"
+					},
+					{
+						"name": "ADEmail",
+						"type": "varchar"
+					},
+					{
+						"name": "BusinessUnit",
+						"type": "varchar"
+					},
+					{
+						"name": "EmployeeStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "EmployeeType",
+						"type": "varchar"
+					},
+					{
+						"name": "PayZone",
+						"type": "varchar"
+					},
+					{
+						"name": "EmployeeClassificationType",
+						"type": "varchar"
+					},
+					{
+						"name": "TerminationType",
+						"type": "varchar"
+					},
+					{
+						"name": "TerminationDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "DepartmentType",
+						"type": "varchar"
+					},
+					{
+						"name": "Division",
+						"type": "varchar"
+					},
+					{
+						"name": "DOB",
+						"type": "varchar"
+					},
+					{
+						"name": "State",
+						"type": "varchar"
+					},
+					{
+						"name": "JobFunctionDescription",
+						"type": "varchar"
+					},
+					{
+						"name": "GenderCode",
+						"type": "varchar"
+					},
+					{
+						"name": "LocationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "RaceDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "MaritalDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "Performance Score",
+						"type": "varchar"
+					},
+					{
+						"name": "Current Employee Rating",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "employee"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_sql_employee_data')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_src_employee_file')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_employee_file_data",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "employee_data.csv",
+						"container": "kaggle-hr-data"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "EmpID",
+						"type": "String"
+					},
+					{
+						"name": "FirstName",
+						"type": "String"
+					},
+					{
+						"name": "LastName",
+						"type": "String"
+					},
+					{
+						"name": "StartDate",
+						"type": "String"
+					},
+					{
+						"name": "ExitDate",
+						"type": "String"
+					},
+					{
+						"name": "Title",
+						"type": "String"
+					},
+					{
+						"name": "Supervisor",
+						"type": "String"
+					},
+					{
+						"name": "ADEmail",
+						"type": "String"
+					},
+					{
+						"name": "BusinessUnit",
+						"type": "String"
+					},
+					{
+						"name": "EmployeeStatus",
+						"type": "String"
+					},
+					{
+						"name": "EmployeeType",
+						"type": "String"
+					},
+					{
+						"name": "PayZone",
+						"type": "String"
+					},
+					{
+						"name": "EmployeeClassificationType",
+						"type": "String"
+					},
+					{
+						"name": "TerminationType",
+						"type": "String"
+					},
+					{
+						"name": "TerminationDescription",
+						"type": "String"
+					},
+					{
+						"name": "DepartmentType",
+						"type": "String"
+					},
+					{
+						"name": "Division",
+						"type": "String"
+					},
+					{
+						"name": "DOB",
+						"type": "String"
+					},
+					{
+						"name": "State",
+						"type": "String"
+					},
+					{
+						"name": "JobFunctionDescription",
+						"type": "String"
+					},
+					{
+						"name": "GenderCode",
+						"type": "String"
+					},
+					{
+						"name": "LocationCode",
+						"type": "String"
+					},
+					{
+						"name": "RaceDesc",
+						"type": "String"
+					},
+					{
+						"name": "MaritalDesc",
+						"type": "String"
+					},
+					{
+						"name": "Performance Score",
+						"type": "String"
+					},
+					{
+						"name": "Current Employee Rating",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_employee_file_data')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_employee_file_data')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_employee_file_data_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_sql_employee_data')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('ls_sql_employee_data_properties_typeProperties_server')]",
+					"database": "[parameters('ls_sql_employee_data_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('ls_sql_employee_data_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('ls_sql_employee_data_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
