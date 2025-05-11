@@ -1,0 +1,9 @@
+{
+	"name": "svramanaa-adf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0368ee28-ed22-4175-bbfb-5dc962107eaf",
+		"tenantId": "43e02a51-cf89-499b-a110-f19cf3739db8"
+	}
+}

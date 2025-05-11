@@ -1,0 +1,122 @@
+{
+	"name": "ds_sink_employee_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_employee_data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EmpID",
+				"type": "varchar"
+			},
+			{
+				"name": "FirstName",
+				"type": "varchar"
+			},
+			{
+				"name": "LastName",
+				"type": "varchar"
+			},
+			{
+				"name": "StartDate",
+				"type": "varchar"
+			},
+			{
+				"name": "ExitDate",
+				"type": "varchar"
+			},
+			{
+				"name": "Title",
+				"type": "varchar"
+			},
+			{
+				"name": "Supervisor",
+				"type": "varchar"
+			},
+			{
+				"name": "ADEmail",
+				"type": "varchar"
+			},
+			{
+				"name": "BusinessUnit",
+				"type": "varchar"
+			},
+			{
+				"name": "EmployeeStatus",
+				"type": "varchar"
+			},
+			{
+				"name": "EmployeeType",
+				"type": "varchar"
+			},
+			{
+				"name": "PayZone",
+				"type": "varchar"
+			},
+			{
+				"name": "EmployeeClassificationType",
+				"type": "varchar"
+			},
+			{
+				"name": "TerminationType",
+				"type": "varchar"
+			},
+			{
+				"name": "TerminationDescription",
+				"type": "varchar"
+			},
+			{
+				"name": "DepartmentType",
+				"type": "varchar"
+			},
+			{
+				"name": "Division",
+				"type": "varchar"
+			},
+			{
+				"name": "DOB",
+				"type": "varchar"
+			},
+			{
+				"name": "State",
+				"type": "varchar"
+			},
+			{
+				"name": "JobFunctionDescription",
+				"type": "varchar"
+			},
+			{
+				"name": "GenderCode",
+				"type": "varchar"
+			},
+			{
+				"name": "LocationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "RaceDesc",
+				"type": "varchar"
+			},
+			{
+				"name": "MaritalDesc",
+				"type": "varchar"
+			},
+			{
+				"name": "Performance Score",
+				"type": "varchar"
+			},
+			{
+				"name": "Current Employee Rating",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "employee"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
