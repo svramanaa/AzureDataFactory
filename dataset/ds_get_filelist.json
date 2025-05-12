@@ -1,0 +1,22 @@
+{
+	"name": "ds_get_filelist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_hrdata_files",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "kaggle-hr-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
