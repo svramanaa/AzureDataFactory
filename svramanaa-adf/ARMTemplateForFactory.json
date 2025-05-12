@@ -64,7 +64,7 @@
 							},
 							"sink": {
 								"type": "AzureSqlSink",
-								"preCopyScript": "TRUNCATE TABLE dbo.employee;",
+								"preCopyScript": "TRUNCATE TABLE dbo.employee_stage;",
 								"writeBehavior": "insert",
 								"sqlWriterUseTableLock": false,
 								"disableMetricsCollection": false
@@ -225,7 +225,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "employee"
+					"table": "employee_stage"
 				}
 			},
 			"dependsOn": [
