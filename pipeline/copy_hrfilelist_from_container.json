@@ -78,7 +78,13 @@
 							"inputs": [
 								{
 									"referenceName": "ds_src_filenames",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
