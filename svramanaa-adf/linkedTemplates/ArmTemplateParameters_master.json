@@ -8,7 +8,13 @@
 		"ls_employee_file_data_connectionString": {
 			"value": ""
 		},
+		"ls_hrdata_files_connectionString": {
+			"value": ""
+		},
 		"ls_sql_employee_data_password": {
+			"value": ""
+		},
+		"ls_sql_hrdata_password": {
 			"value": ""
 		},
 		"ls_sql_employee_data_properties_typeProperties_server": {
@@ -18,6 +24,15 @@
 			"value": "rsv-staging-db"
 		},
 		"ls_sql_employee_data_properties_typeProperties_userName": {
+			"value": "svramanaa"
+		},
+		"ls_sql_hrdata_properties_typeProperties_server": {
+			"value": "svr-staging-db.database.windows.net"
+		},
+		"ls_sql_hrdata_properties_typeProperties_database": {
+			"value": "rsv-staging-db"
+		},
+		"ls_sql_hrdata_properties_typeProperties_userName": {
 			"value": "svramanaa"
 		},
 		"containerUri": {

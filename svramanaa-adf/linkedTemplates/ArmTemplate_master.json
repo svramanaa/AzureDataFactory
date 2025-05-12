@@ -11,9 +11,17 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_employee_file_data'"
 		},
+		"ls_hrdata_files_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_hrdata_files'"
+		},
 		"ls_sql_employee_data_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_sql_employee_data'"
+		},
+		"ls_sql_hrdata_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_sql_hrdata'"
 		},
 		"ls_sql_employee_data_properties_typeProperties_server": {
 			"type": "string",
@@ -24,6 +32,18 @@
 			"defaultValue": "rsv-staging-db"
 		},
 		"ls_sql_employee_data_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "svramanaa"
+		},
+		"ls_sql_hrdata_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "svr-staging-db.database.windows.net"
+		},
+		"ls_sql_hrdata_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "rsv-staging-db"
+		},
+		"ls_sql_hrdata_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "svramanaa"
 		},
@@ -57,8 +77,14 @@
 					"ls_employee_file_data_connectionString": {
 						"value": "[parameters('ls_employee_file_data_connectionString')]"
 					},
+					"ls_hrdata_files_connectionString": {
+						"value": "[parameters('ls_hrdata_files_connectionString')]"
+					},
 					"ls_sql_employee_data_password": {
 						"value": "[parameters('ls_sql_employee_data_password')]"
+					},
+					"ls_sql_hrdata_password": {
+						"value": "[parameters('ls_sql_hrdata_password')]"
 					},
 					"ls_sql_employee_data_properties_typeProperties_server": {
 						"value": "[parameters('ls_sql_employee_data_properties_typeProperties_server')]"
@@ -68,6 +94,15 @@
 					},
 					"ls_sql_employee_data_properties_typeProperties_userName": {
 						"value": "[parameters('ls_sql_employee_data_properties_typeProperties_userName')]"
+					},
+					"ls_sql_hrdata_properties_typeProperties_server": {
+						"value": "[parameters('ls_sql_hrdata_properties_typeProperties_server')]"
+					},
+					"ls_sql_hrdata_properties_typeProperties_database": {
+						"value": "[parameters('ls_sql_hrdata_properties_typeProperties_database')]"
+					},
+					"ls_sql_hrdata_properties_typeProperties_userName": {
+						"value": "[parameters('ls_sql_hrdata_properties_typeProperties_userName')]"
 					}
 				}
 			},
