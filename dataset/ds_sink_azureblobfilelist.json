@@ -1,0 +1,30 @@
+{
+	"name": "ds_sink_azureblobfilelist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_hrdata",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "fileid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "filename",
+				"type": "varchar"
+			},
+			{
+				"name": "foldername",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "azureblobfilelist"
+		}
+	}
+}

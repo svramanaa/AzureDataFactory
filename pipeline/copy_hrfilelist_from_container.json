@@ -73,7 +73,22 @@
 										"type": "DelimitedTextReadSettings"
 									}
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": "truncate table dbo.azureblobfilelist",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false,
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
@@ -83,8 +98,18 @@
 										"filename": {
 											"value": "@item().name",
 											"type": "Expression"
+										},
+										"foldername": {
+											"value": "@item().name",
+											"type": "Expression"
 										}
 									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_sink_azureblobfilelist",
+									"type": "DatasetReference"
 								}
 							]
 						}
