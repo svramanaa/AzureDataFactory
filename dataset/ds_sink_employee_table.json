@@ -115,7 +115,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "employee"
+			"table": "employee_stage"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
